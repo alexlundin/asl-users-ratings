@@ -111,6 +111,9 @@ class Asl_Users_Ratings {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-asl-users-ratings-i18n.php';
 
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/global_functions.php';
+
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
