@@ -74,6 +74,11 @@ class Asl_Users_Ratings_Admin
 
     }
 
+    /**
+     * Register form post types
+     *
+     * @return void
+     */
     public function register_post_type()
     {
         $args = array(
@@ -107,6 +112,11 @@ class Asl_Users_Ratings_Admin
         register_post_type($this->cpt_name, $args);
     }
 
+    /**
+     * Register form taxonomy
+     *
+     * @return void
+     */
     public function create_rating_taxonomy()
     {
         $args = array(
@@ -129,6 +139,60 @@ class Asl_Users_Ratings_Admin
             'query_var' => true,
         );
         register_taxonomy($this->ct_name, $this->cpt_name, $args);
+    }
+
+    public function add_menu()
+    {
+        global $submenu;
+        $capability = users_ratings_admin_role();
+
+        if (!$capability) {
+            return;
+        }
+
+        $menuName = __('Users Ratings', 'asl-users-ratings');
+
+        add_menu_page(
+            $menuName,
+            $menuName,
+            $capability,
+            'users_ratings',
+            [$this, 'main_page'],
+            'dashicons-saved',
+            70
+        );
+
+        $submenu['users_ratings']['all_ratings'] = [
+            __('Rating', 'asl-users-ratings'),
+            $capability,
+            'admin.php?page=users_ratings#/',
+            '',
+            //TODO: functions for main page
+            ''
+        ];
+
+        $submenu['users_ratings']['categories'] = [
+            __('Categories', 'asl-users-ratings'),
+            $capability,
+            'admin.php?page=users_ratings#/categories',
+            '',
+            //TODO: functions for main page
+            ''
+        ];
+
+        $submenu['users_ratings']['import'] = [
+            __('Import', 'asl-users-ratings'),
+            $capability,
+            'admin.php?page=users_ratings#/import',
+            '',
+            //TODO: functions for main page
+            ''
+        ];
+    }
+
+    public function main_page()
+    {
+        include(plugin_dir_path(__FILE__) . 'partials/asl-users-ratings-admin-display.php');
     }
 
     /**
