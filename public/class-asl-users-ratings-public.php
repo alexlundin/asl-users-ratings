@@ -72,9 +72,7 @@ class Asl_Users_Ratings_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/asl-users-ratings-public.css', array(), $this->version, 'all' );
-
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'vue/assets/css/frontend.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -95,6 +93,10 @@ class Asl_Users_Ratings_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+        wp_enqueue_script($this->plugin_name . '-manifest-front', plugin_dir_url(__FILE__) . 'vue/assets/js/manifest.js', array(), $this->version, true);
+        wp_enqueue_script($this->plugin_name . '-vendor-front', plugin_dir_url(__FILE__) . 'vue/assets/js/vendor.js', array($this->plugin_name . '-manifest-front'), $this->version, true);
+        wp_enqueue_script($this->plugin_name . '-front', plugin_dir_url(__FILE__) . 'vue/assets/js/front.js', array($this->plugin_name . '-vendor-front'), $this->version, true);
+
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/asl-users-ratings-public.js', array( 'jquery' ), $this->version, false );
 

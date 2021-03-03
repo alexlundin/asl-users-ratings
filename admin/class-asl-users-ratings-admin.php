@@ -215,7 +215,7 @@ class Asl_Users_Ratings_Admin
          * class.
          */
 
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/asl-users-ratings-admin.css', array(), $this->version, 'all');
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'vue/assets/css/admin.css', array(), $this->version, 'all');
 
     }
 
@@ -239,7 +239,9 @@ class Asl_Users_Ratings_Admin
          * class.
          */
 
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/asl-users-ratings-admin.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name . '-manifest', plugin_dir_url(__FILE__) . 'vue/assets/js/manifest.js', array(), $this->version, true);
+        wp_enqueue_script($this->plugin_name . '-vendor', plugin_dir_url(__FILE__) . 'vue/assets/js/vendor.js', array($this->plugin_name . '-manifest'), $this->version, true);
+        wp_enqueue_script($this->plugin_name . '-admin', plugin_dir_url(__FILE__) . 'vue/assets/js/admin.js', array($this->plugin_name . '-vendor'), $this->version, true);
 
     }
 
